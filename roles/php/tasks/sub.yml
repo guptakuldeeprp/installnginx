@@ -1,0 +1,7 @@
+- name: install all pre packages
+  yum:  
+    name: "{{ item }}" 
+    state: present
+  register: res
+- debug: var=res
+

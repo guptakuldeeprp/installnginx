@@ -1,0 +1,50 @@
+- name: Install PHP-FPM
+  include: sub.yml
+  with_items: "{{ php_packages }}"
+
+- name: Create target directory
+  file: path=/tmp/PHP state=directory mode=0755
+  # ignore_errors: True
+
+- name: Copy the PHP package
+  unarchive:
+    src: files/php-5.5.16.tar.gz
+    dest: "{{ php_dest }}"
+
+- name: run the configure command
+  shell: cd {{ php_dest }}/php-5.5.16; ./configure --prefix=/usr/local/php-5.5.16 --with-jpeg-dir=/usr/local/php-5.5.16/lib --enable-fpm --with-openssl --with-mcrypt --enable-bcmath --enable-calendar --enable-exif --with-curl --with-gd --with-xmlrpc --with-iconv --enable-exif --enable-ftp --enable-gd-native-ttf --enable-libxml --enable-sockets --enable-mbstring --enable-zip --with-zlib --enable-wddx --enable-mbregex --with-mysqli
+- name: run tha make command
+  shell: cd {{ php_dest }}/php-5.5.16; make
+
+- name: run tha make command
+  shell: cd {{ php_dest }}/php-5.5.16; make install
+
+- name: copy init.d.php-fpm
+  copy:
+    src: files/init.d.php-fpm
+    dest: /usr/local/php-5.5.16/
+
+- name: copy php.ini
+  copy:
+    src: files/php.ini
+    dest: /usr/local/php-5.5.16/lib/php.ini
+
+- name: Copy the SSH2 package
+  unarchive:
+    src: files/ssh2-0.12.tgz
+    dest: "{{ php_dest }}"
+
+- name: configure command for php-config --with-ssh2
+  shell: cd {{ php_dest }}/ssh2-0.12; /usr/local/php-5.5.16/bin/phpize; ./configure --with-php-config=/usr/local/php-5.5.16/bin/php-config --with-ssh2
+- name:  make command php-config --with-ssh2
+  shell: cd {{ php_dest }}/ssh2-0.12; make
+- name:  make install command php-config --with-ssh2
+  shell: cd {{ php_dest }}/ssh2-0.12; make install
+
+
+- name: configure command php-config
+  shell: cd {{ php_dest }}/ssh2-0.12; /usr/local/php-5.5.16/bin/phpize; ./configure --with-php-config=/usr/local/php-5.5.16/bin/php-config
+- name: make command php-config --with-ssh2
+  shell: cd {{ php_dest }}/ssh2-0.12; make
+- name:  make install command for php-config
+  shell: cd {{ php_dest }}/ssh2-0.12; make install

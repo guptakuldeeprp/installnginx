@@ -1,0 +1,24 @@
+group: analytics
+haproxyip: 10.40.2.9
+nginx_packages:
+   - nginx-1.6.0-1.el6.ngx.x86_64.rpm
+   - nginx-debug-1.6.0-1.el6.ngx.x86_64.rpm
+   - nginx-debuginfo-1.6.0-1.el6.ngx.x86_64.rpm
+php_packages:
+  - libxml2
+  - libxml2-devel
+  - curl
+  - curl-devel
+  - libpng
+  - libpng-devel
+  - libjpeg
+  - libjpeg-devel
+  - libmcrypt
+  - libmcrypt-devel
+  - zlib-devel
+  - libssh2
+  - libssh2-devel
+  - pcre
+  - pcre-devel
+  - autoconf
+php_dest: /tmp/PHP

@@ -1,0 +1,20 @@
+---
+# vars file for php
+php_packages:
+  - libxml2
+  - libxml2-devel
+  - curl
+  - curl-devel
+  - libpng
+  - libpng-devel
+  - libjpeg
+  - libjpeg-devel
+  - libmcrypt
+  - libmcrypt-devel
+  - zlib-devel
+  - libssh2
+  - libssh2-devel
+  - pcre
+  - pcre-devel
+  - autoconf
+php_dest: /tmp/PHP
