@@ -15,7 +15,9 @@ Python:  2.6 and 2.7
 App: Ansible
 
 ### Role Variables
+
 haproxyip: IP Address of HA Server
+
 target: nginx server IP
 
 ### Dependencies
