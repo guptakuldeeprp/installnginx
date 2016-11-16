@@ -1,3 +1,11 @@
+# Install Nginx
+
+Synopsis:
+
+This Script is for Nginx and PHP-5.5.16 Installation on Centos/RHEL 6 Server.
+
+### Tech Requirement
+
 User: ansible
 
 OS: red hat(V 6) family
