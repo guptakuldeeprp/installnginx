@@ -1,6 +1,7 @@
 ---
 # vars file for php
 php_packages:
+  - epel-release
   - libxml2
   - libxml2-devel
   - curl
