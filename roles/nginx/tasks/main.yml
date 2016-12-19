@@ -26,3 +26,13 @@
     state: directory
     owner: root
     group: analytics        
+    mode: 0775
+
+
+- name: Create Backup under vhosts directory
+  file: 
+    path: /etc/nginx/vhosts/old_conf
+    state: directory
+    owner: webtech
+    group: analytics        
+    mode: 0775
