@@ -41,10 +41,41 @@
 - name:  make install command php-config --with-ssh2
   shell: cd {{ php_dest }}/ssh2-0.12; make install
 
-
 - name: configure command php-config
   shell: cd {{ php_dest }}/ssh2-0.12; /usr/local/php-5.5.16/bin/phpize; ./configure --with-php-config=/usr/local/php-5.5.16/bin/php-config
 - name: make command php-config --with-ssh2
   shell: cd {{ php_dest }}/ssh2-0.12; make
 - name:  make install command for php-config
   shell: cd {{ php_dest }}/ssh2-0.12; make install
+
+- name: Create fpm.d directory
+  file: 
+    path: /usr/local/php-5.5.16/etc/fpm.d
+    state: directory
+    owner: webtech
+    group: analytics
+    recurse: yes
+    mode: 0775
+
+- name: change /usr/local/php-5.5.16/var/log directory permission
+  file: 
+    path: /usr/local/php-5.5.16/var/log
+    state: directory
+    owner: webtech
+    group: analytics
+    recurse: yes
+    mode: 0775
+
+- name: change /usr/local/php-5.5.16/var/  directory permission
+  file: 
+    path: /usr/local/php-5.5.16/var/
+    state: directory
+    owner: webtech
+    group: analytics
+    mode: 0775
+
+- name: change /usr/local/php-5.5.16/init.d.php-fpm file permission
+  file: 
+    path: /usr/local/php-5.5.16/init.d.php-fpm
+    state: file
+    mode: 0775

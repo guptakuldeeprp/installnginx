@@ -8,7 +8,7 @@
   with_items: nginx_packages
     
 - name: Copy the ssl dir
-  copy: src=files/ssl dest=/etc/nginx/ssl
+  copy: src=files/ssl dest=/etc/nginx
 
 - name: Install the nginx_nginx_packages
   yum: name=/tmp/RPMS/{{ item }} state=installed
@@ -26,6 +26,7 @@
     state: directory
     owner: root
     group: analytics        
+    recurse: yes
     mode: 0775
 
 
@@ -35,4 +36,5 @@
     state: directory
     owner: webtech
     group: analytics        
+    recurse: yes
     mode: 0775
