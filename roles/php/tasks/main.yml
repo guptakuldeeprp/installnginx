@@ -22,12 +22,20 @@
 - name: copy init.d.php-fpm
   copy:
     src: files/init.d.php-fpm
-    dest: /usr/local/php-5.5.16/
+    dest: /usr/local/php-5.5.16/init.d.php-fpm
+    mode: 0775
+    owner: root
+    group: root
 
 - name: copy php.ini
   copy:
     src: files/php.ini
     dest: /usr/local/php-5.5.16/lib/php.ini
+
+- name: copy php-fpm.conf
+  copy:
+    src: files/php-fpm.conf
+    dest: /usr/local/php-5.5.16/etc/php-fpm.conf
 
 - name: Copy the SSH2 package
   unarchive:
@@ -47,6 +55,12 @@
   shell: cd {{ php_dest }}/ssh2-0.12; make
 - name:  make install command for php-config
   shell: cd {{ php_dest }}/ssh2-0.12; make install
+
+
+- name: Copy the php/extensions folder
+  unarchive:
+    src: files/extensions.tar.gz
+    dest: /usr/local/php-5.5.16/lib/php/
 
 - name: Create fpm.d directory
   file: 
@@ -72,10 +86,4 @@
     state: directory
     owner: webtech
     group: analytics
-    mode: 0775
-
-- name: change /usr/local/php-5.5.16/init.d.php-fpm file permission
-  file: 
-    path: /usr/local/php-5.5.16/init.d.php-fpm
-    state: file
     mode: 0775
